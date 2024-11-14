@@ -21,7 +21,9 @@
         "version": "v1",
         "name": "atehere",
         "host": "0.0.0.0",
-        "port": "80"
+        "port": "80",
+        "staticRoot": "/var/lib/atehere/static",
+        "url": "https://dorduncuboyut.media"
     },
     "db": {
         "driver": "postgres",

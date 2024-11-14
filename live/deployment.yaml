@@ -31,6 +31,8 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /etc/atehere
+            - name: static-volume
+              mountPath: /var/lib/atehere/static
           ports:
             - name: web
               containerPort: 80
@@ -63,4 +65,12 @@ spec:
               - key: application.json
                 path: application.json
         - name: pg-volume
-          emptyDir: {}
+          nfs:
+            server: pi-manager-1
+            path: /shared/atehere/data
+            readOnly: false
+        - name: static-volume
+          nfs:
+            server: pi-manager-1
+            path: /shared/atehere/static
+            readOnly: false
