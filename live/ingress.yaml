@@ -4,12 +4,10 @@ metadata:
   name: atehere-ingress
   namespace: codebrewlab-live
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
-
+    traefik.ingress.kubernetes.io/router.entrypoints: web
 spec:
   rules:
-    - host: dorduncuboyut.media
+    - host: atehere.codebrewlab.net
       http:
         paths:
           - path: /
@@ -19,5 +17,3 @@ spec:
                 name: atehere-service
                 port:
                   number: 80
-  tls:
-    - secretName: dorduncuboyut.media.certs

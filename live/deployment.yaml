@@ -4,6 +4,7 @@ metadata:
   name: atehere-deployment
   namespace: codebrewlab-live
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: atehere
@@ -49,7 +50,7 @@ spec:
                 name: atehere-db-secret
           volumeMounts:
             - name: pg-volume
-              mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
           ports:
             - containerPort: 5432
           imagePullPolicy: Always
