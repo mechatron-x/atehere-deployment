@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: atehere-deployment
-  namespace: dorduncuboyut
+  namespace: codebrewlab-live
 spec:
   selector:
     matchLabels:
@@ -27,7 +27,7 @@ spec:
             - secretRef:
                 name: atehere-db-secret
             - secretRef:
-                name: atehere-firebase-secret
+                name: atehere-app-secret
           volumeMounts:
             - name: config-volume
               mountPath: /etc/atehere
@@ -55,7 +55,7 @@ spec:
           imagePullPolicy: Always
 
       imagePullSecrets:
-        - name: mechatron-x.ghcr.io
+        - name: codebrewlab.ghcr.io
 
       volumes:
         - name: config-volume
@@ -65,12 +65,8 @@ spec:
               - key: application.json
                 path: application.json
         - name: pg-volume
-          nfs:
-            server: pi-manager-1
-            path: /shared/atehere/data
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: atehere-db-pvc 
         - name: static-volume
-          nfs:
-            server: pi-manager-1
-            path: /shared/atehere/static
-            readOnly: false
+          persistentVolumeClaim:
+            claimName: atehere-static-pvc
